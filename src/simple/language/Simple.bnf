@@ -26,4 +26,6 @@ definition ::= IDENTIFIER EQ expression
 
 expression ::= operand (OPERATOR operand)*
 
-operand ::= IDENTIFIER | NUMBER_LITERAL
+operand ::= named_id | NUMBER_LITERAL
+
+named_id ::= IDENTIFIER { mixin="simple.language.psi.impl.NamedIdMixin" }
