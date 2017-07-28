@@ -1,0 +1,29 @@
+{
+  parserClass="simple.language.parser.SimpleParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Simple"
+  psiImplClassSuffix="Impl"
+  psiPackage="simple.language.psi"
+  psiImplPackage="simple.language.psi.impl"
+
+  elementTypeHolderClass="simple.language.psi.SimpleTypes"
+  elementTypeClass="simple.language.psi.SimpleElementType"
+  tokenTypeClass="simple.language.psi.SimpleTokenType"
+
+  psiImplUtilClass="simple.language.psi.impl.SimplePsiImplUtil"
+}
+
+simpleFile ::= (definition|blank)*
+
+private blank ::=
+    WHITE_SPACE
+    | FRESH_LINE
+    | COMMENT
+
+definition ::= IDENTIFIER EQ expression
+
+expression ::= operand (OPERATOR operand)*
+
+operand ::= IDENTIFIER | NUMBER_LITERAL
