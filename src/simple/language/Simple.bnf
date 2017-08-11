@@ -22,10 +22,16 @@ private blank ::=
     | FRESH_LINE
     | COMMENT
 
-definition ::= IDENTIFIER EQ expression
+definition ::= IDENTIFIER EQ expression {
+    mixin="simple.language.psi.impl.SimpleNamedElementImpl"
+    implements="simple.language.psi.SimpleNamedElement"
+    methods=[getName setName getNameIdentifier]
+}
 
 expression ::= operand (OPERATOR operand)*
 
-operand ::= named_id | NUMBER_LITERAL
+operand ::= variable | NUMBER_LITERAL
 
-named_id ::= IDENTIFIER { mixin="simple.language.psi.impl.NamedIdMixin" }
+variable ::= IDENTIFIER {
+    methods=[getReference]
+}
